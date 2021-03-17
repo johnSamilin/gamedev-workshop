@@ -1,2 +1,5 @@
 # gamedev-workshop
-This is a bootstrap project for a workshop. There will be listed all the necessary libs.
+Этот проект содержит необходимый набор библиотек и настроек для воркшопа.
+
+# scripts
+Выполните команду `npm install` или `yarn`, чтобы установить зависимости, `npm run start` или `yarn start` чтобы запустить сервер по адресу `http://localhost:1234`

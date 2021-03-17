@@ -1,0 +1,31 @@
+{
+  "name": "gamedev-workshop",
+  "version": "1.0.0",
+  "description": "This is a bootstrap project for a workshop. There will be listed all the necessary libs.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "parcel ./index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnSamilin/gamedev-workshop.git"
+  },
+  "author": "Alex Saltykov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnSamilin/gamedev-workshop/issues"
+  },
+  "homepage": "https://github.com/johnSamilin/gamedev-workshop#readme",
+  "dependencies": {
+    "@babel/preset-react": "^7.12.13",
+    "gamepads": "^1.2.2",
+    "parcel-bundler": "^1.12.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-three-fiber": "^5.3.19",
+    "three": "^0.126.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10"
+  }
+}
