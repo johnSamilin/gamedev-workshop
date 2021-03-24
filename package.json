@@ -27,6 +27,10 @@
     "three": "^0.126.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.10"
+    "@babel/core": "^7.13.10",
+    "parcel-plugin-static-files-copy": "^2.6.0"
+  },
+  "staticFiles": {
+    "staticPath": "assets"
   }
 }
