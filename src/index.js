@@ -8,8 +8,14 @@ import { GamepadControls } from './GamepadControls';
 
 import './index.css';
 import { Player } from './Player';
+import { fireballsStore } from './store/fireballs';
+import { zombiesStore } from './store/zombies';
+import { Zombie } from './Zombie';
 
 function Game() {
+  const fireballs = fireballsStore(state => state.fireballs);
+  const zombies = zombiesStore(state => state.zombies);
+
   return (
     <Canvas
       onCreated={({ gl }) => {
@@ -25,13 +31,25 @@ function Game() {
       <GamepadControls>
         <Player />
       </GamepadControls>
+      
+      {fireballs.map(({id, x, z, heading}) => <Fireball
+        key={id}
+        id={id}
+        position={[x, 1.5, z]}
+        heading={heading}
+      />)}
+      
+      {Object.entries(zombies).map(([id, {x, z, hp}]) => <Zombie
+        key={id}
+        id={id}
+        position={[x, 0.2, z]}
+        hp={hp}
+      />)}
+
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeBufferGeometry attach="geometry" args={[100, 100, 10, 10]} />
         <meshPhysicalMaterial attach="material" color="grey" />
       </mesh>
-
-      <pointLight position={[2, 5, 2]} intensity={1} color="white" castShadow />
-      <pointLight position={[-2, 5, 2]} intensity={0.75} color={"blue"} castShadow />
 
       <OrbitControls      
         maxPolarAngle={Math.PI / 2 + 0.1}

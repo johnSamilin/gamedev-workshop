@@ -7,16 +7,14 @@ import run from './animations/run';
 import idle from './animations/idle';
 import die from './animations/die';
 import cast from './animations/cast';
+import zombieWalk from './animations/zombie_walk';
 
-export const NPC = memo(({ model, id, isRunning, scale, isAttacking, isDead }) => {
-  const [dead, setDead] = useState(false);
-  useEffect(() => {
-    setTimeout(() => setDead(true), 5000);
-  }, []);
+export const NPC = memo(({ model, id, isRunning, scale, isAttacking, isDead, zombie }) => {
+  console.log('npc', zombie)
 
   const object = useGetModel(model, id);
   const mixer = new AnimationMixer(object);
-  const runAnimation = mixer.clipAction(AnimationClip.parse(run));
+  const runAnimation = mixer.clipAction(AnimationClip.parse(zombie ? zombieWalk : run));
   const idleAnimation = mixer.clipAction(AnimationClip.parse(idle));
   const dieAnimation = mixer.clipAction(AnimationClip.parse(die));
   const attackAnimation = mixer.clipAction(AnimationClip.parse(cast));
@@ -26,7 +24,7 @@ export const NPC = memo(({ model, id, isRunning, scale, isAttacking, isDead }) =
   attackAnimation.repetitions = 1;
 
   useEffect(() => {
-    if (dead) {
+    if (isDead) {
       mixer.stopAllAction();
       dieAnimation.play();
     } else {
@@ -41,7 +39,7 @@ export const NPC = memo(({ model, id, isRunning, scale, isAttacking, isDead }) =
         attackAnimation.play();
       }
     }
-  }, [isRunning, dead, mixer]);
+  }, [isRunning, isDead, isAttacking, mixer]);
 
   useFrame(() => {
     mixer.update(0.03);

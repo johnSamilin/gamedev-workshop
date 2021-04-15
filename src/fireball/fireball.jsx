@@ -3,6 +3,7 @@
 import React, { memo } from 'react';
 import { useFrame, useResource } from 'react-three-fiber';
 import * as THREE from 'three';
+import { Movable } from '../hoc/Movable';
 
 import { ballUniforms, cylinderUniforms as steamUniforms, flameUniforms } from './const';
 import { ballFragShader, ballVertexShader } from './shaders/ball';
@@ -114,10 +115,12 @@ const Steam = memo(({ velocity = 0.5 }) => {
 
 export const Fireball = memo(({ scale = [0.2, 0.2, 0.2], position = [0, 0, 0], heading }) => {
 	return <group scale={scale} position={position}>
-		<group rotation={[0, -Math.PI/2, 0]}>
-			<Ball />
-			<Flame />
-			<Steam />
-		</group>
+		<Movable heading={heading} velocity={2}>
+			<group rotation={[0, -Math.PI/2, 0]}>
+				<Ball />
+				<Flame />
+				<Steam />
+			</group>
+		</Movable>
 	</group>;
 });
