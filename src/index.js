@@ -1,3 +1,4 @@
+import { OrbitControls } from '@react-three/drei';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Canvas } from 'react-three-fiber';
@@ -29,6 +30,11 @@ function Game() {
 
       <pointLight position={[2, 5, 2]} intensity={1} color="white" castShadow />
       <pointLight position={[-2, 5, 2]} intensity={0.75} color={"blue"} castShadow />
+
+      <OrbitControls      
+        maxPolarAngle={Math.PI / 2 + 0.1}
+        minPolarAngle={Math.PI / 3}
+      />
     </Canvas>
   );
 }
