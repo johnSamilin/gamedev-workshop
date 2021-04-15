@@ -114,12 +114,10 @@ const Steam = memo(({ velocity = 0.5 }) => {
 
 export const Fireball = memo(({ scale = [0.2, 0.2, 0.2], position = [0, 0, 0], heading }) => {
 	return <group scale={scale} position={position}>
-		<Movable heading={heading} velocity={2}>
-			<group rotation={[0, -Math.PI/2, 0]}>
-				<Ball />
-				<Flame />
-				<Steam />
-			</group>
-		</Movable>
+		<group rotation={[0, -Math.PI/2, 0]}>
+			<Ball />
+			<Flame />
+			<Steam />
+		</group>
 	</group>;
 });
