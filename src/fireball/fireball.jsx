@@ -3,6 +3,7 @@
 import React, { memo } from 'react';
 import { useFrame, useResource } from 'react-three-fiber';
 import * as THREE from 'three';
+import { Movable } from '../hoc/Movable';
 
 import { ballUniforms, cylinderUniforms as steamUniforms, flameUniforms } from './const';
 import { ballFragShader, ballVertexShader } from './shaders/ball';

@@ -11,6 +11,10 @@ export const GamepadControls = memo(({ children }) => {
   const [isAttacking, setAttack] = useState(false);
 
   function onAttackBtnToggle(e) {
+    if (e.index === 7) {
+      // attack btn
+      setAttack(e.value === 1);
+    }
   }
 
   function onMoveLeftStick(e) {
@@ -63,6 +67,9 @@ export const GamepadControls = memo(({ children }) => {
                 hor,
                 ver,
             ] });
+        }
+        if (e.code === 'Space') {
+            onAttackBtnToggle({ index: 7, value: 0 });
         }
     });
   }, []);
