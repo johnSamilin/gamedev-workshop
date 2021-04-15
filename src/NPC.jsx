@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { AnimationMixer, AnimationClip } from 'three';
 import { useFrame } from 'react-three-fiber';
 import { useGetModel } from './helpers/getModel';
@@ -6,7 +6,7 @@ import { useGetModel } from './helpers/getModel';
 import run from './animations/run';
 import idle from './animations/idle';
 
-export const NPC = ({ model, id, isRunning, scale = [0.02, 0.02, 0.02] }) => {
+export const NPC = memo(({ model, id, isRunning, scale = [0.02, 0.02, 0.02] }) => {
   const object = useGetModel(model, id);
   const mixer = new AnimationMixer(object);
   const runAnimation = mixer.clipAction(AnimationClip.parse(run));
@@ -27,4 +27,4 @@ export const NPC = ({ model, id, isRunning, scale = [0.02, 0.02, 0.02] }) => {
   });
 
   return <primitive object={object} scale={scale} />
-}
+});

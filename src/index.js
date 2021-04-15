@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom';
 import { Canvas } from 'react-three-fiber';
 import { PCFSoftShadowMap } from 'three';
 import { Fireball } from './fireball/fireball';
+import { GamepadControls } from './GamepadControls';
 
 import './index.css';
-import { NPC } from './NPC';
+import { Player } from './Player';
 
 function Game() {
   return (
@@ -21,7 +22,9 @@ function Game() {
       }}
     >
       <axesHelper args={[2]} />
-      <NPC model="hero" />
+      <GamepadControls>
+        <Player />
+      </GamepadControls>
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeBufferGeometry attach="geometry" args={[100, 100, 10, 10]} />
         <meshPhysicalMaterial attach="material" color="grey" />
