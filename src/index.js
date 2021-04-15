@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Canvas } from 'react-three-fiber';
 import { PCFSoftShadowMap } from 'three';
+import { Fireball } from './fireball/fireball';
 
 import './index.css';
 
@@ -19,10 +20,7 @@ function Game() {
       }}
     >
       <axesHelper args={[2]} />
-      <mesh position={[0.5, 0.5, 0.5]} castShadow>
-        <boxBufferGeometry attach="geometry" />
-        <meshPhysicalMaterial attach="material" />
-      </mesh>
+      <Fireball position={[1, 1, 1]} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeBufferGeometry attach="geometry" args={[100, 100, 10, 10]} />
         <meshPhysicalMaterial attach="material" color="grey" />
