@@ -5,6 +5,6 @@ export const fireballsStore = create(set => ({
   add: (id, x, z, heading) => set(state => ({ ...state, fireballs: [ ...state.fireballs, { id, x, z, heading } ] })),
   explode: (fid) => set(state => ({
     ...state,
-    fireballs: state.fireballs.filter(({ id }) => id === fid),
+    fireballs: state.fireballs.filter(({ id }) => id !== fid),
   })),
 }));
