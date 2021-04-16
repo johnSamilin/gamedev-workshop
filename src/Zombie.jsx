@@ -5,6 +5,7 @@ import { NPC } from './NPC';
 import { Movable } from './hoc/Movable';
 import { zombiesStore } from './store/zombies';
 import { playerStore } from './store/player';
+import { Collidable } from './hoc/Collidable';
 
 const scale = [0.015, 0.015, 0.015];
 
@@ -20,7 +21,9 @@ export const Zombie = memo(({ id, position = [0, 0, 0], hp }) => {
       .add(new Vector3(playerPos.x, 0, playerPos.z))
   }
 
-  return (<Movable position={position} heading={heading.current} velocity={0.015} onMove={onMove}>
-    <NPC model="zombie" scale={scale} zombie id={id} isRunning={true} isDead={hp <= 0} />
-  </Movable>)
+  return (<Movable position={position} heading={heading.current} velocity={hp <= 0 ? 0 : 0.015} onMove={onMove}>
+      <Collidable type="zombie" id={id}>
+        <NPC model="zombie" scale={scale} zombie id={id} isRunning={true} isDead={hp <= 0} />
+      </Collidable>
+    </Movable>)
 });

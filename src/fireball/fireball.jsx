@@ -1,9 +1,12 @@
 // adaptation of https://codepen.io/pizza3/pen/Rwoqemx?editors=0010
 
-import React, { memo } from 'react';
+import React, { memo, useCallback, useRef } from 'react';
 import { useFrame, useResource } from 'react-three-fiber';
 import * as THREE from 'three';
+import { Collidable } from '../hoc/Collidable';
 import { Movable } from '../hoc/Movable';
+import { fireballsStore } from '../store/fireballs';
+import { zombiesStore } from '../store/zombies';
 
 import { ballUniforms, cylinderUniforms as steamUniforms, flameUniforms } from './const';
 import { ballFragShader, ballVertexShader } from './shaders/ball';
@@ -113,14 +116,26 @@ const Steam = memo(({ velocity = 0.5 }) => {
 	);
 });
 
-export const Fireball = memo(({ scale = [0.2, 0.2, 0.2], position = [0, 0, 0], heading }) => {
+export const Fireball = memo(({ id, scale = [0.2, 0.2, 0.2], position = [0, 0, 0], heading }) => {
+	const hit = zombiesStore(state => state.hit);
+	const explode = fireballsStore(state => state.explode);
+
+	function onHit(otherId, type) {
+		if (type === 'zombie') {
+			explode(id);
+			hit(otherId);
+		}
+	}
+
 	return <group scale={scale} position={position}>
 		<Movable heading={heading} velocity={2}>
-			<group rotation={[0, -Math.PI/2, 0]}>
-				<Ball />
-				<Flame />
-				<Steam />
-			</group>
+			<Collidable type="fireball" id={id} onHit={onHit}>
+				<group rotation={[0, -Math.PI/2, 0]}>
+					<Ball />
+					<Flame />
+					<Steam />
+				</group>
+			</Collidable>
 		</Movable>
 	</group>;
 });

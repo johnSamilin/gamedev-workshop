@@ -10,8 +10,6 @@ import cast from './animations/cast';
 import zombieWalk from './animations/zombie_walk';
 
 export const NPC = memo(({ model, id, isRunning, scale, isAttacking, isDead, zombie }) => {
-  console.log('npc', zombie)
-
   const object = useGetModel(model, id);
   const mixer = new AnimationMixer(object);
   const runAnimation = mixer.clipAction(AnimationClip.parse(zombie ? zombieWalk : run));
