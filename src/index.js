@@ -6,6 +6,7 @@ import { PCFSoftShadowMap } from 'three';
 import { Fireball } from './fireball/fireball';
 
 import './index.css';
+import { NPC } from './NPC';
 
 function Game() {
   return (
@@ -20,7 +21,7 @@ function Game() {
       }}
     >
       <axesHelper args={[2]} />
-      <Fireball position={[1, 1, 1]} />
+      <NPC model="hero" />
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeBufferGeometry attach="geometry" args={[100, 100, 10, 10]} />
         <meshPhysicalMaterial attach="material" color="grey" />
